@@ -35,7 +35,7 @@
 
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.js';
 
-        var pdfUrl = 'presentation.pdf'; // Replace with your PDF file path
+        var pdfUrl = 'presentation.pdf?' + new Date().getTime(); // Cache-busting query parameter
 
         // Asynchronous download PDF
         pdfjsLib.getDocument(pdfUrl).promise.then(function(pdfDoc_) {
