@@ -38,8 +38,7 @@
         var pdfUrl = 'presentation.pdf?' + new Date().getTime(); // Cache-busting query parameter
 
         // Asynchronous download PDF
-        pdfjsLib.getDocument(pdfUrl).promise.then(function(pdfDoc_) {
-            var pdfDoc = pdfDoc_;
+        pdfjsLib.getDocument(pdfUrl).promise.then(function(pdfDoc) {
             var pageNum = 1; // Change page number as needed
             pdfDoc.getPage(pageNum).then(function(page) {
                 var canvas = document.getElementById('pdfViewer');
@@ -53,7 +52,11 @@
                     viewport: viewport
                 };
                 page.render(renderContext);
+            }).catch(function(error) {
+                console.error('Error getting page:', error);
             });
+        }).catch(function(error) {
+            console.error('Error loading document:', error);
         });
     </script>
 </body>
